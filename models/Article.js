@@ -6,7 +6,7 @@
 
 var mongoose = require("mongoose");
 
-var ArticleSchema = new mongoose.Schema({
+var articleSchema = new mongoose.Schema({
     title: {
         type: String,
         trim: true,
@@ -19,10 +19,10 @@ var ArticleSchema = new mongoose.Schema({
     },
     note: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Note"
+        ref: "note"
     }
 });
 
-var Article = mongoose.model("Article", ArticleSchema);
+var article = mongoose.model("article", articleSchema);
 
-module.exports = Article;
+module.exports = article;

@@ -17,11 +17,14 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/monCheerioDb", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/monCheerioNewsDb", { useNewUrlParser: true });
 
 // routes
 require("./routes/html-routes")(app);
+require("./routes/api-routes")(app);
 
+// models
+var models = require("./models");
 
 app.listen(PORT, function () { 
     console.log("listening on port: " + PORT);
