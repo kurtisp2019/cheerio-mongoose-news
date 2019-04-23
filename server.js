@@ -6,6 +6,7 @@
 
 var express = require("express");
 var exphbs = require("express-handlebars");
+var mongoose = require("mongoose");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+mongoose.connect("mongodb://localhost:27017/monCheerioDb", { useNewUrlParser: true });
 
 // routes
 require("./routes/html-routes")(app);
