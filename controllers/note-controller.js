@@ -6,12 +6,12 @@
 
 var note = require("../models/note");
 module.exports = {
-    createNote: function (_newNoteObj, _callBack) {
+    createNote: function (_newNoteObj, _callback) {
 
         note.create({ title: "", body: "" }).then(function (_newNote) {
 
             console.log("note was created");
-            _callBack(_newNote);
+            _callback(_newNote);
         });
 
     },
