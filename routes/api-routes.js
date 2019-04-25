@@ -5,13 +5,23 @@
  */
 
 var articleCtrl = require("../controllers/article-controller");
+var scrape = require("../scraper/scrape");
 //var noteCtrl = require("../controllers/note-controller");
 
 module.exports = function (app) { 
 
+    app.get("/api/scrape", function (_req, _res) { 
+        scrape.scrape("http://www.echojs.com/", function (_data) { 
+
+            // add the data to the database
+            for (let i = 0; i < _data.length; ++i)
+                articleCtrl.createNewArticle(_data[i]);
+            _res.json(_data);
+        });
+    });
+
     app.get("/api/allArticles", function (_req, _res) { 
 
-      
         articleCtrl.getAllArticles(function (_articles) { 
             _res.json(_articles);
         });

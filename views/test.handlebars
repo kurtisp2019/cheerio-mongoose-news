@@ -1,0 +1,76 @@
+<p>Home!!!</p>
+
+
+<button id="addArticle">Add artcile</button>
+<button id="deleteAllArticles">Delete all articles</button>
+<button id="deleteArticle">Delete an article</button>
+<button id="updateNote">Update an articles note</button>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script>
+
+  $("#updateNote").on("click", function (_e) {
+
+    _e.preventDefault();
+
+    $.ajax({
+      method: "PUT",
+      url: "/api/updateArticleNote/" + "5cbfa34a49bbc96b9ab1e89f",
+      data: {
+        title: "this test",
+        body: "its just a test whoooooooooooooo"
+      }
+    }).then(function (_response) {
+
+    });
+
+  });
+
+  $("#addArticle").on("click", function (_e) {
+
+    _e.preventDefault();
+
+    $.ajax({
+      method: "POST",
+      url: "/api/addArticle",
+      data: {
+        title: "test",
+        link: "fakelink"
+      }
+    }).then(function (_response) {
+
+
+    });
+
+  });
+
+  $("#deleteAllArticles").on("click", function (_e) {
+
+    _e.preventDefault();
+
+    $.ajax({
+      method: "POST",
+      url: "/api/deleteArticles"
+    }).then(function (_response) {
+
+
+    });
+
+  });
+
+  $("#deleteArticle").on("click", function (_e) {
+
+    _e.preventDefault();
+
+    $.ajax({
+      method: "POST",
+      url: "/api/deleteArticle/" + "5cbf9e3241b03b6962ddb753"
+    }).then(function (_response) {
+
+
+    });
+
+  });
+
+
+</script>

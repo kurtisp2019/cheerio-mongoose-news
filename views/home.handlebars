@@ -1,76 +1,54 @@
-<p>Home!!!</p>
 
+<div style = "float:left">
+{{#each articles}}
+<div articleId = {{this._id}} id ="article" style = "background-color:red; width: 70vw">
+<div>title: {{this.title}}</div>
+<a href={{this.link}}>{{this.link}}</a>
+</div>
+{{/each}}
+</div>
+<div style="float: left">
+    <div id = "note" articleId = '-1' style="display:block; position: fixed; margin-top:400px; height: 200px; width: 200px; background-color: yellow;">
+        <h3>Note:</h3>
+        <label>title: </label>
+        <input id= "note-title" type="text">
+        <br><br>
+        <label id = "note-body">body: </label>
+        <textarea style = "resize: none"></textarea>
+        <button id = "save-note">save</button>
+    </div>
+</div>
 
-<button id="addArticle">Add artcile</button>
-<button id="deleteAllArticles">Delete all articles</button>
-<button id="deleteArticle">Delete an article</button>
-<button id="updateNote">Update an articles note</button>
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"
-  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"
+  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+  crossorigin="anonymous"></script>
 <script>
 
-  $("#updateNote").on("click", function (_e) {
+    $("#article").on("click", function(_e){
 
-    _e.preventDefault();
+        //_e.preventDefault();
 
-    $.ajax({
-      method: "PUT",
-      url: "/api/updateArticleNote/" + "5cbf9e3141b03b6962ddb74f",
-      data: {
-        title: "test",
-        body: "fakelink"
-      }
-    }).then(function (_response) {
-
+        
+        $("#note").attr("articleId", $(this).attr("articleId"));
+        $("#note").attr("display", "none");
+        console.log($("#note").attr("display"));
+        console.log($("#note").attr("articleId"));
     });
 
-  });
+    $("#save-note").on("click", function(_e){
 
-  $("#addArticle").on("click", function (_e) {
+            _e.preventDefault();
 
-    _e.preventDefault();
+            $.ajax({
+                type: "PUT",
+                url: "/api/updateArticleNote/" + $(this).attr("articleId"),
+                data: {
+                    title: $("#note-title").val(),
+                    body: $("#note-body").val()
+                }
+            }).then(function(_response){
 
-    $.ajax({
-      method: "POST",
-      url: "/api/addArticle",
-      data: {
-        title: "test",
-        link: "fakelink"
-      }
-    }).then(function (_response) {
-
-
+            });
     });
-
-  });
-
-  $("#deleteAllArticles").on("click", function (_e) {
-
-    _e.preventDefault();
-
-    $.ajax({
-      method: "POST",
-      url: "/api/deleteArticles"
-    }).then(function (_response) {
-
-
-    });
-
-  });
-
-  $("#deleteArticle").on("click", function (_e) {
-
-    _e.preventDefault();
-
-    $.ajax({
-      method: "POST",
-      url: "/api/deleteArticle/" + "5cbf9e3241b03b6962ddb753"
-    }).then(function (_response) {
-
-
-    });
-
-  });
-
-
 </script>
