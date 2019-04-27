@@ -1,0 +1,31 @@
+
+#articleDisplay{
+    float:left; 
+    background-color: whitesmoke;
+    width: 70vw;
+}
+#note {
+
+    display:none; 
+    position: fixed; 
+    margin-top:300px; 
+    height: 200px; 
+    width: 200px; 
+    background-color: yellow;
+    border: 1px solid black;
+}
+.article {
+    background-color: white;
+}
+#note-body{
+    resize: none;
+}
+
+.webLink {
+    color: white;
+    background-color: teal;
+}
+
+.activeBorder {
+    border: 5px solid green;
+}

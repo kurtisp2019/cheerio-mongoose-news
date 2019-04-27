@@ -1,54 +1,76 @@
-
-<div style = "float:left">
-{{#each articles}}
-<div articleId = {{this._id}} id ="article" style = "background-color:red; width: 70vw">
-<div>title: {{this.title}}</div>
-<a href={{this.link}}>{{this.link}}</a>
-</div>
-{{/each}}
+<div id="articleDisplay">
+    {{#each articles}}
+    <div class="article" articleId={{this._id}}>
+        
+        <p class = "webLink">{{this.link}}</a>
+        <p>{{this.title}} </p> 
+    </div>
+    <br>
+    {{/each}}
 </div>
 <div style="float: left">
-    <div id = "note" articleId = '-1' style="display:block; position: fixed; margin-top:400px; height: 200px; width: 200px; background-color: yellow;">
-        <h3>Note:</h3>
+    <div id="note" articleId='-1'>
+        <h3 id = "note-article-title">Note for article: "</h3>
         <label>title: </label>
-        <input id= "note-title" type="text">
+        <input id="note-title" type="text">
         <br><br>
-        <label id = "note-body">body: </label>
-        <textarea style = "resize: none"></textarea>
-        <button id = "save-note">save</button>
+        <label>body: </label>
+        <textarea id="note-body"></textarea>
+        <button id="btn-save-note">save</button>
     </div>
 </div>
 
-<script
-  src="https://code.jquery.com/jquery-3.4.0.min.js"
-  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+
 <script>
 
-    $("#article").on("click", function(_e){
+    
+    $(".article").on("click", function (_e) {
 
-        //_e.preventDefault();
-
+        $(".article").removeClass("activeBorder");
+        $(this).addClass("activeBorder");
+        _e.preventDefault();
+ 
+        var articleId = $(this).attr("articleId");
+        var children = $(this).children();
+        var title = $(this).attr("articleTitle");
         
-        $("#note").attr("articleId", $(this).attr("articleId"));
-        $("#note").attr("display", "none");
-        console.log($("#note").attr("display"));
-        console.log($("#note").attr("articleId"));
+        $.ajax({
+            type: "GET",
+            url: "/api/articleNote/" + articleId
+        }).then(function(_response){
+      
+             $("#note-title").val(_response.note.title);
+             $("#note-body").val(_response.note.body);
+             $("#note-article-title").text("Note for article: " + children[0].textContent + '\"');
+            $("#note").attr("articleId", articleId);
+            $("#note").attr("display", "block");
+             $("#note").show();
+        });
+
+       
     });
 
-    $("#save-note").on("click", function(_e){
+    $("#btn-save-note").on("click", function (_e) {
 
-            _e.preventDefault();
+        _e.preventDefault();
+        //console.log($("#note-body").val());
 
-            $.ajax({
-                type: "PUT",
-                url: "/api/updateArticleNote/" + $(this).attr("articleId"),
-                data: {
-                    title: $("#note-title").val(),
-                    body: $("#note-body").val()
-                }
-            }).then(function(_response){
+        $.ajax({
+            type: "PUT",
+            url: "/api/updateArticleNote/" + $("#note").attr("articleId"),
+            data: {
+                title: $("#note-title").val(),
+                body: $("#note-body").val()
+            }
+        }).then(function (_response) {
+            {{!-- console.log("note updated");
+            $("#note-title").val("");
+            $("#note-body").val(""); --}}
+        });
 
-            });
+
     });
 </script>

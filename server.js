@@ -17,7 +17,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/monCheerioNewsDb", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/monCheerioNewsDb";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+//mongoose.connect("mongodb://localhost:27017/monCheerioNewsDb", { useNewUrlParser: true });
 
 // routes
 require("./routes/html-routes")(app);
