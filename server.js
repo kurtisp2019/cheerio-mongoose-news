@@ -15,9 +15,6 @@ app.set("view engine", "handlebars");
 app.use(express.urlencoded( { extended: true } ));
 app.use(express.json());
 
-// models
-var models = require("./models");
-
 app.use(express.static("public"));
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/monCheerioNewsDb";

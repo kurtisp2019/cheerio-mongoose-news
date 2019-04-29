@@ -17,7 +17,7 @@ module.exports = {
     },
     updateNote: function (_id, _newNoteObj) {
 
-        note.findByIdAndUpdate(_id, _newNoteObj).then(function (_updatedNote) {
+        note.findOnendUpdate(_id, _newNoteObj).then(function (_updatedNote) {
 
             console.log("note updated");
         }).catch((_err) => { if (_err) console.log("error: " + _err) });
