@@ -23,12 +23,14 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //mongoose.connect("mongodb://localhost:27017/monCheerioNewsDb", { useNewUrlParser: true });
 
+// models
+var models = require("./models");
+
 // routes
 require("./routes/html-routes")(app);
 require("./routes/api-routes")(app);
 
-// models
-var models = require("./models");
+
 
 app.listen(PORT, function () { 
     console.log("listening on port: " + PORT);
