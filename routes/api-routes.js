@@ -14,7 +14,7 @@ module.exports = function (app) {
         scrape.scrape("https://meyerweb.com/other/", function (_data) { 
 
             // add the data to the database
-            console.log(_data);
+            //console.log(_data);
             for (let i = 0; i < _data.length; ++i)
                 articleCtrl.createNewArticle(_data[i]);
             _res.json(_data);

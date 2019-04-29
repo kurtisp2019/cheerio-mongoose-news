@@ -7,10 +7,9 @@
 #note {
 
     display:none; 
-    position: fixed; 
-    margin-top:300px; 
+    position: fixed;   
     height: 200px; 
-    width: 200px; 
+    width: 28vw; 
     background-color: yellow;
     border: 1px solid black;
 }
@@ -28,4 +27,8 @@
 
 .activeBorder {
     border: 5px solid green;
+}
+
+#save-note{
+
 }

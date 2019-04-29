@@ -10,6 +10,7 @@ var noteCtrl = require("../controllers/note-controller");
 module.exports = {
     createNewArticle: function (_newArticleObj) {
 
+        // check for duplicates
         noteCtrl.createNote({ title: "", body: "" }, function (_newNote) { 
                 
             article.create({

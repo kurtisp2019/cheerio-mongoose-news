@@ -10,7 +10,7 @@
 </div>
 <div style="float: left">
     <div id="note" articleId='-1'>
-        <h3 id = "note-article-title">Note for article: "</h3>
+        <h3 id = "note-article-title"></h3>
         <label>title: </label>
         <input id="note-title" type="text">
         <br><br>
@@ -26,9 +26,15 @@
 
 <script>
 
+    {{!-- $.ajax({
+        method: "GET",
+        url: "/api/scrape/"
+    }).then(_response =>); --}}
     
     $(".article").on("click", function (_e) {
 
+        _e.preventDefault();
+        
         $(".article").removeClass("activeBorder");
         $(this).addClass("activeBorder");
         _e.preventDefault();
@@ -44,7 +50,7 @@
       
              $("#note-title").val(_response.note.title);
              $("#note-body").val(_response.note.body);
-             $("#note-article-title").text("Note for article: " + children[0].textContent + '\"');
+             $("#note-article-title").text("Add note for article: \"" + children[0].textContent + '\"');
             $("#note").attr("articleId", articleId);
             $("#note").attr("display", "block");
              $("#note").show();
