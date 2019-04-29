@@ -12,6 +12,11 @@ module.exports = function (app) {
 
         articleCtrl.getAllArticles(function (_articles) {
             console.log(_articles);
+            if (_articles.length === 0){
+                _res.render("home");
+            return;
+        }
+            
             _res.render("home", { articles: _articles });
         });
     });
